@@ -1,0 +1,2054 @@
+{
+    "package": "GroupMe",
+    "tagline": "GroupMe API",
+    "description": "GroupMe is a free group messaging app. A free and simple way to stay in touch with friends and family, quickly and easily.",
+    "image": "https:\/\/logo.clearbit.com\/groupme.com",
+    "repo": "https:\/\/github.com\/RapidSoftwareSolutions\/Marketplace-GroupMe-Package",
+    "keywords": [
+        "API",
+        "groupme",
+        "messaging",
+        "IM"
+    ],
+    "accounts": {
+        "domain": "http:\/\/groupme.com\/",
+        "credentials": [
+            "accessToken"
+        ]
+    },
+    "blocks": [
+        {
+            "name": "listGroups",
+            "description": "List the authenticated user's active groups.",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Fetch a particular page of results. Defaults to 1.",
+                    "required": false
+                },
+                {
+                    "name": "perPage",
+                    "vendorName": "per_page",
+                    "type": "Number",
+                    "info": "Define page size. Defaults to 10.",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "token",
+                            "page",
+                            "per_page"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listFormerGroups",
+            "description": "List they groups you have left but can rejoin.",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Fetch a particular page of results. Defaults to 1.",
+                    "required": false
+                },
+                {
+                    "name": "perPage",
+                    "vendorName": "per_page",
+                    "type": "Number",
+                    "info": "Define page size. Defaults to 10.",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups\/former",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "token",
+                            "page",
+                            "per_page"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getSingleGroup",
+            "description": "Load a specific group.",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "groupId",
+                    "type": "String",
+                    "info": "Id of the group",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups\/{$data['groupId']}",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "token"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createGroup",
+            "description": "Create a new group",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "groupName",
+                    "vendorName": "name",
+                    "type": "String",
+                    "info": "Primary name of the group. Maximum 140 characters",
+                    "required": true
+                },
+                {
+                    "name": "groupDescription",
+                    "vendorName": "description",
+                    "type": "String",
+                    "info": "A subheading for the group. Maximum 255 characters",
+                    "required": false
+                },
+                {
+                    "name": "groupImage",
+                    "vendorName": "image_url",
+                    "type": "String",
+                    "info": " GroupMe Image Service URL",
+                    "required": false
+                },
+                {
+                    "name": "shareGroup",
+                    "vendorName": "share",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "If you pass a true value for share, we'll generate a share URL. Anybody with this URL can join the group.",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups?token={$data['accessToken']}",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": [
+                            "name",
+                            "description",
+                            "image_url",
+                            "share"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateGroup",
+            "description": "Update existing group",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "groupId",
+                    "type": "String",
+                    "info": "Id of the group",
+                    "required": true
+                },
+                {
+                    "name": "groupName",
+                    "vendorName": "name",
+                    "type": "String",
+                    "info": "Primary name of the group. Maximum 140 characters",
+                    "required": false
+                },
+                {
+                    "name": "groupDescription",
+                    "vendorName": "description",
+                    "type": "String",
+                    "info": "A subheading for the group. Maximum 255 characters",
+                    "required": false
+                },
+                {
+                    "name": "groupImage",
+                    "vendorName": "image_url",
+                    "type": "String",
+                    "info": " GroupMe Image Service URL",
+                    "required": false
+                },
+                {
+                    "name": "shareGroup",
+                    "vendorName": "share",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "If you pass a true value for share, we'll generate a share URL. Anybody with this URL can join the group.",
+                    "required": false
+                },
+                {
+                    "name": "officeMode",
+                    "vendorName": "office_mode",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Office mode of the group",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups\/{$data['groupId']}\/update?token={$data['accessToken']}",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": [
+                            "name",
+                            "description",
+                            "image_url",
+                            "share",
+                            "office_mode"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteGroup",
+            "description": "Delete a specific group.",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "groupId",
+                    "type": "String",
+                    "info": "Id of the group",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups\/{$data['groupId']}\/destroy?token={$data['accessToken']}",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": []
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "joinSharedGroup",
+            "description": "Join a shared group",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "groupId",
+                    "type": "String",
+                    "info": "Id of the group",
+                    "required": true
+                },
+                {
+                    "name": "shareToken",
+                    "type": "String",
+                    "info": "Share token of the group",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups\/{$data['groupId']}\/join\/{$data['shareToken']}?token={$data['accessToken']}",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": []
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "rejoinSharedGroup",
+            "description": "Rejoin a group. Only works if you previously removed yourself.",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "groupId",
+                    "vendorName": "group_id",
+                    "type": "String",
+                    "info": "Id of the group",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups\/join?token={$data['accessToken']}",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": [
+                            "group_id"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "changeGroupOwners",
+            "description": "Change owner of requested groups.",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "requests",
+                    "type": "List",
+                    "structure": {
+                        "name": "request",
+                        "type": "JSON",
+                        "info": "Single request"
+                    },
+                    "info": "One request is object where user_id is the new owner who must be active member of a group specified by group_id.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups\/change_owners?token={$data['accessToken']}",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": [
+                            "requests"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "addMembers",
+            "description": "Add members to a group.  The response includes a results_id that's used in the results request.",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "groupId",
+                    "type": "String",
+                    "info": "ID of the group",
+                    "required": true
+                },
+                {
+                    "name": "members",
+                    "type": "List",
+                    "structure": {
+                        "name": "member",
+                        "type": "JSON",
+                        "info": "Single member"
+                    },
+                    "info": "nickname is required. You must use one of the following identifiers: user_id, phone_number, or email.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups\/{$data['groupId']}\/members\/add?token={$data['accessToken']}",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": [
+                            "members"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getAddResults",
+            "description": "Get the membership results from an add call.",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "groupId",
+                    "type": "String",
+                    "info": "ID of the group",
+                    "required": true
+                },
+                {
+                    "name": "resultId",
+                    "type": "String",
+                    "info": "ID of the result",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups\/{$data['groupId']}\/members\/results\/{$data['resultId']}",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "token"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "removeMember",
+            "description": "Remove a member (or yourself) from a group.",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "groupId",
+                    "type": "String",
+                    "info": "ID of the group",
+                    "required": true
+                },
+                {
+                    "name": "memberId",
+                    "type": "String",
+                    "info": "ID of the member",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups\/{$data['groupId']}\/members\/{$data['memberId']}\/remove?token={$data['accessToken']}",
+            "request": {
+                "method": "POST",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": []
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateNickname",
+            "description": "Update your nickname in a group. The nickname must be between 1 and 50 characters.",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "groupId",
+                    "type": "String",
+                    "info": "ID of the group",
+                    "required": true
+                },
+                {
+                    "name": "nickname",
+                    "type": "String",
+                    "info": "New nickname",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups\/{$data['groupId']}\/memberships\/update?token={$data['accessToken']}",
+            "request": {
+                "method": "POST",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": [
+                            "nickname"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listGroupMessages",
+            "description": "Retrieve messages for a group.",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "groupId",
+                    "type": "String",
+                    "info": "ID of the group",
+                    "required": true
+                },
+                {
+                    "name": "beforeId",
+                    "vendorName": "before_id",
+                    "type": "String",
+                    "info": "Returns messages created before the given message ID",
+                    "required": false
+                },
+                {
+                    "name": "sinceId",
+                    "vendorName": "since_id",
+                    "type": "String",
+                    "info": "Returns most recent messages created after the given message ID",
+                    "required": false
+                },
+                {
+                    "name": "afterId",
+                    "vendorName": "after_id",
+                    "type": "String",
+                    "info": "Returns messages created immediately after the given message ID",
+                    "required": false
+                },
+                {
+                    "name": "limit",
+                    "type": "Number",
+                    "info": "Number of messages returned. Default is 20. Max is 100.",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups\/{$data['groupId']}\/messages",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "token",
+                            "before_id",
+                            "since_id",
+                            "after_id",
+                            "limit"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "sendTextMessage",
+            "description": "Send a text message to a group",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "groupId",
+                    "type": "String",
+                    "info": "ID of the group",
+                    "required": true
+                },
+                {
+                    "name": "sourceGuid",
+                    "vendorName": "source_guid",
+                    "type": "String",
+                    "info": " Client-side IDs for messages. This can be used by clients to set their own identifiers on messages, but the server also scans these for de-duplication. That is, if two messages are sent with the same source_guid within one minute of each other, the second message will fail with a 409 Conflict response.",
+                    "required": true
+                },
+                {
+                    "name": "text",
+                    "type": "String",
+                    "info": "The maximum length is 1,000 characters.",
+                    "required": true
+                },
+                {
+                    "name": "attachments",
+                    "type": "List",
+                    "structure": {
+                        "name": "attachment",
+                        "type": "JSON",
+                        "info": "Single attachment"
+                    },
+                    "info": "A polymorphic list of attachments (locations, images, etc). You may have more than one of any type of attachment, provided clients can display it.",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups\/{$data['groupId']}\/messages",
+            "request": {
+                "method": "POST",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": [
+                            "token",
+                            "source_guid",
+                            "text",
+                            "attachments"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "sendAttachmentMessage",
+            "description": "Send a message with attachment and optional text to a group",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "groupId",
+                    "type": "String",
+                    "info": "ID of the group",
+                    "required": true
+                },
+                {
+                    "name": "sourceGuid",
+                    "vendorName": "source_guid",
+                    "type": "String",
+                    "info": " Client-side IDs for messages. This can be used by clients to set their own identifiers on messages, but the server also scans these for de-duplication. That is, if two messages are sent with the same source_guid within one minute of each other, the second message will fail with a 409 Conflict response.",
+                    "required": true
+                },
+                {
+                    "name": "text",
+                    "type": "String",
+                    "info": "The maximum length is 1,000 characters.",
+                    "required": false
+                },
+                {
+                    "name": "attachments",
+                    "type": "List",
+                    "structure": {
+                        "name": "attachment",
+                        "type": "JSON",
+                        "info": "Single attachment"
+                    },
+                    "info": "A polymorphic list of attachments (locations, images, etc). You may have more than one of any type of attachment, provided clients can display it.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups\/{$data['groupId']}\/messages",
+            "request": {
+                "method": "POST",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": [
+                            "token",
+                            "source_guid",
+                            "text",
+                            "attachments"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listChats",
+            "description": "Returns a paginated list of direct message chats, or conversations, sorted by updated_at descending.",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "page",
+                    "type": "Number",
+                    "info": "Fetch a particular page of results. Defaults to 1.",
+                    "required": false
+                },
+                {
+                    "name": "perPage",
+                    "vendorName": "per_page",
+                    "type": "Number",
+                    "info": "Define page size. Defaults to 10.",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/chats",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "token",
+                            "page",
+                            "per_page"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listDirectMessages",
+            "description": "Fetch direct messages between two users.",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "otherUserId",
+                    "vendorName": "other_user_id",
+                    "type": "String",
+                    "info": "The other participant in the conversation.",
+                    "required": true
+                },
+                {
+                    "name": "beforeId",
+                    "vendorName": "before_id",
+                    "type": "String",
+                    "info": "Returns messages created before the given message ID",
+                    "required": false
+                },
+                {
+                    "name": "sinceId",
+                    "vendorName": "since_id",
+                    "type": "String",
+                    "info": "Returns most recent messages created after the given message ID",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups\/direct_messages",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "token",
+                            "before_id",
+                            "since_id",
+                            "other_user_id"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "sendDirectTextMessage",
+            "description": "Send a text DM to another user",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "recipientId",
+                    "vendorName": "recipient_id",
+                    "type": "String",
+                    "info": "The other participant in the conversation.",
+                    "required": true
+                },
+                {
+                    "name": "sourceGuid",
+                    "vendorName": "source_guid",
+                    "type": "String",
+                    "info": " Client-side IDs for messages. This can be used by clients to set their own identifiers on messages, but the server also scans these for de-duplication. That is, if two messages are sent with the same source_guid within one minute of each other, the second message will fail with a 409 Conflict response.",
+                    "required": true
+                },
+                {
+                    "name": "text",
+                    "type": "String",
+                    "info": "The maximum length is 1,000 characters.",
+                    "required": true
+                },
+                {
+                    "name": "attachments",
+                    "type": "List",
+                    "structure": {
+                        "name": "attachment",
+                        "type": "JSON",
+                        "info": "Single attachment"
+                    },
+                    "info": "A polymorphic list of attachments (locations, images, etc). You may have more than one of any type of attachment, provided clients can display it.",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups\/direct_messages",
+            "request": {
+                "method": "POST",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": [
+                            "token",
+                            "source_guid",
+                            "text",
+                            "attachments",
+                            "recipient_id"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "sendDirectAttachmentMessage",
+            "description": "Send a DM to another user with attachment and options text",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "recipientId",
+                    "vendorName": "recipient_id",
+                    "type": "String",
+                    "info": "The other participant in the conversation.",
+                    "required": true
+                },
+                {
+                    "name": "sourceGuid",
+                    "vendorName": "source_guid",
+                    "type": "String",
+                    "info": " Client-side IDs for messages. This can be used by clients to set their own identifiers on messages, but the server also scans these for de-duplication. That is, if two messages are sent with the same source_guid within one minute of each other, the second message will fail with a 409 Conflict response.",
+                    "required": true
+                },
+                {
+                    "name": "text",
+                    "type": "String",
+                    "info": "The maximum length is 1,000 characters.",
+                    "required": false
+                },
+                {
+                    "name": "attachments",
+                    "type": "List",
+                    "structure": {
+                        "name": "attachment",
+                        "type": "JSON",
+                        "info": "Single attachment"
+                    },
+                    "info": "A polymorphic list of attachments (locations, images, etc). You may have more than one of any type of attachment, provided clients can display it.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups\/direct_messages",
+            "request": {
+                "method": "POST",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": [
+                            "token",
+                            "source_guid",
+                            "text",
+                            "attachments",
+                            "recipient_id"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "likeMessage",
+            "description": "Like a message.",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "conversationId",
+                    "type": "String",
+                    "info": "ID of the group",
+                    "required": true
+                },
+                {
+                    "name": "messageId",
+                    "type": "String",
+                    "info": "ID of the message",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/messages\/{$data['conversationId']}\/{$data['messageId']}\/like?token={$data['accessToken']}",
+            "request": {
+                "method": "POST",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": []
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "unlikeMessage",
+            "description": "Unlike a message.",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "conversationId",
+                    "type": "String",
+                    "info": "ID of the group",
+                    "required": true
+                },
+                {
+                    "name": "messageId",
+                    "type": "String",
+                    "info": "ID of the message",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/messages\/{$data['conversationId']}\/{$data['messageId']}\/unlike?token={$data['accessToken']}",
+            "request": {
+                "method": "POST",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": []
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listLikedMessages",
+            "description": "A list of the liked messages in the group for a given period of time. Messages are ranked in order of number of likes.",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "groupId",
+                    "type": "String",
+                    "info": "Id of the group",
+                    "required": true
+                },
+                {
+                    "name": "period",
+                    "type": "Select",
+                    "options": [
+                        "day",
+                        "week",
+                        "month"
+                    ],
+                    "info": "One of: 'day', 'week', or 'month'",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups\/{$data['groupId']}\/likes",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "token",
+                            "period"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listMyLikes",
+            "description": "A list of messages you have liked. Messages are returned in reverse chrono-order. Note that the payload includes a liked_at timestamp in ISO-8601 format.",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "groupId",
+                    "type": "String",
+                    "info": "Id of the group",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups\/{$data['groupId']}\/likes\/mine",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "token"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listLikesForMe",
+            "description": "A list of messages others have liked.",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "groupId",
+                    "type": "String",
+                    "info": "Id of the group",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/groups\/{$data['groupId']}\/likes\/for_me",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "token"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createBot",
+            "description": "Create a bot. ",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "groupId",
+                    "vendorName": "group_id",
+                    "type": "String",
+                    "info": "Id of the group",
+                    "required": true
+                },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Bot name",
+                    "required": true
+                },
+                {
+                    "name": "avatar",
+                    "vendorName": "avatar_url",
+                    "type": "String",
+                    "info": "Bot avatar",
+                    "required": false
+                },
+                {
+                    "name": "callbackUrl",
+                    "vendorName": "callback_url",
+                    "type": "String",
+                    "info": "Bot callback url",
+                    "required": false
+                },
+                {
+                    "name": "dmNotification",
+                    "vendorName": "dm_notification",
+                    "type": "Select",
+                    "options": [
+                        "true",
+                        "false"
+                    ],
+                    "info": "Enable DM notifications",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/bots?token={$data['accessToken']}",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": [
+                            "group_id",
+                            "name",
+                            "avatar_url",
+                            "callback_url",
+                            "dm_notification"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "sendBotMessage",
+            "description": "Post a message from a bot",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "botId",
+                    "vendorName": "bot_id",
+                    "type": "String",
+                    "info": "Id of the bot",
+                    "required": true
+                },
+                {
+                    "name": "text",
+                    "type": "String",
+                    "info": "Message text",
+                    "required": true
+                },
+                {
+                    "name": "picture",
+                    "vendorName": "picture_url",
+                    "type": "String",
+                    "info": "Image must be processed through image service.",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/bots\/post?token={$data['accessToken']}",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": [
+                            "bot_id",
+                            "text",
+                            "picture_url"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listBots",
+            "description": "List bots that you have created",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/bots?token={$data['accessToken']}",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": []
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteBot",
+            "description": "Remove a bot that you have created",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "botId",
+                    "vendorName": "bot_id",
+                    "type": "String",
+                    "info": "Id of the bot",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/bots\/destroy?token={$data['accessToken']}",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": [
+                            "bot_id"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getMyInfo",
+            "description": "Get details about the authenticated user",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/users\/me",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "token"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "updateMyInfo",
+            "description": "Update attributes about your own account",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "avatarUrl",
+                    "vendorName": "avatar_url",
+                    "type": "String",
+                    "info": "URL to valid JPG\/PNG\/GIF image. URL will be converted into an image service link (https:\/\/i.groupme.com\/....)",
+                    "required": false
+                },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Name must be of the form FirstName LastName",
+                    "required": false
+                },
+                {
+                    "name": "email",
+                    "type": "String",
+                    "info": "Email address. Must be in name@domain.com form.",
+                    "required": false
+                },
+                {
+                    "name": "zipCode",
+                    "vendorName": "zip_code",
+                    "type": "String",
+                    "info": "Zip code.",
+                    "required": false
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/users\/update?token={$data['accessToken']}",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": [
+                            "avatar_url",
+                            "name",
+                            "email",
+                            "zip_code"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "enableSMSMode",
+            "description": "Enables SMS mode for N hours, where N is at most 48. After N hours have elapsed, user will receive push notfications.",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "duration",
+                    "type": "Number",
+                    "info": "Maximum sms mode duration",
+                    "required": true
+                },
+                {
+                    "name": "registrationId",
+                    "vendorName": "registration_id",
+                    "type": "String",
+                    "info": "The push notification ID\/token that should be suppressed during SMS mode. If this is omitted, both SMS and push notifications will be delivered to the device.",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/users\/sms_mode?token={$data['accessToken']}",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": [
+                            "duration",
+                            "registration_id"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "disableSMSMode",
+            "description": "Disables SMS mode",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/users\/sms_mode\/delete?token={$data['accessToken']}",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": []
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "listBlockedUsers",
+            "description": "A list of contacts you have blocked. These people cannot DM you.",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "user",
+                    "type": "String",
+                    "info": "Your user Id",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/blocks",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "token",
+                            "user"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "checkIfBlocked",
+            "description": "Asks if a block exists between you and another user id",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "user",
+                    "type": "String",
+                    "info": "Your user Id",
+                    "required": true
+                },
+                {
+                    "name": "otherUser",
+                    "type": "String",
+                    "info": "Other user Id",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/blocks\/between",
+            "request": {
+                "method": "get",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "token",
+                            "user",
+                            "otherUser"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "createBlock",
+            "description": "Creates a block between you and the contact",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "user",
+                    "type": "String",
+                    "info": "Your user Id",
+                    "required": true
+                },
+                {
+                    "name": "otherUser",
+                    "type": "String",
+                    "info": "Other user Id",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/blocks?token={$data['accessToken']}",
+            "request": {
+                "method": "post",
+                "params": [
+                    {
+                        "paramsType": "json",
+                        "bodyParams": [
+                            "user",
+                            "otherUser"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "deleteBlock",
+            "description": "Removes block between you and other user",
+            "args": [
+                {
+                    "name": "accessToken",
+                    "vendorName": "token",
+                    "type": "credentials",
+                    "info": "Access token provided by GroupMe",
+                    "required": true
+                },
+                {
+                    "name": "user",
+                    "type": "String",
+                    "info": "Your user Id",
+                    "required": true
+                },
+                {
+                    "name": "otherUser",
+                    "type": "String",
+                    "info": "Other user Id",
+                    "required": true
+                }
+            ],
+            "url": "https:\/\/api.groupme.com\/v3\/blocks",
+            "request": {
+                "method": "delete",
+                "params": [
+                    {
+                        "paramsType": "query",
+                        "bodyParams": [
+                            "token",
+                            "user",
+                            "otherUser"
+                        ]
+                    }
+                ],
+                "headers": {
+                    "Content-Type": "application\/json"
+                }
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        }
+    ]
+}

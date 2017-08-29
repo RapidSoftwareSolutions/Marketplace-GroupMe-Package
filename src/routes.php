@@ -1,0 +1,45 @@
+<?php
+$routes = [
+    'metadata',
+    'listGroups',
+    'listFormerGroups',
+    'getSingleGroup',
+    'createGroup',
+    'updateGroup',
+    'deleteGroup',
+    'joinSharedGroup',
+    'rejoinSharedGroup',
+    'changeGroupOwners',
+    'addMembers',
+    'getAddResults',
+    'removeMember',
+    'updateNickname',
+    'listGroupMessages',
+    'sendTextMessage',
+    'sendAttachmentMessage',
+    'listChats',
+    'listDirectMessages',
+    'sendDirectTextMessage',
+    'sendDirectAttachmentMessage',
+    'likeMessage',
+    'unlikeMessage',
+    'listLikedMessages',
+    'listMyLikes',
+    'listLikesForMe',
+    'createBot',
+    'sendBotMessage',
+    'listBots',
+    'deleteBot',
+    'getMyInfo',
+    'updateMyInfo',
+    'enableSMSMode',
+    'disableSMSMode',
+    'listBlockedUsers',
+    'checkIfBlocked',
+    'createBlock',
+    'deleteBlock'
+];
+foreach($routes as $file) {
+    require __DIR__ . '/../src/routes/'.$file.'.php';
+}
+
