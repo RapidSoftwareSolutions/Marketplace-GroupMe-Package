@@ -21,7 +21,7 @@ $app->post('/api/GroupMe/updateMyInfo', function ($request, $response) {
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 
     $client = $this->httpClient;
-    $query_str = "https://api.groupme.com/v3/users/update?token={$data['accessToken']}";
+    $query_str = "https://api.groupme.com/v3/users/update?token={$data['token']}";
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = ["Content-Type"=>"application/json"];
