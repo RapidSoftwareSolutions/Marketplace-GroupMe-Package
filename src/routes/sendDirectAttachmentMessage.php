@@ -21,7 +21,7 @@ $app->post('/api/GroupMe/sendDirectAttachmentMessage', function ($request, $resp
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 
     $client = $this->httpClient;
-    $query_str = "https://api.groupme.com/v3/groups/direct_messages?token={$data['token']}";
+    $query_str = "https://api.groupme.com/v3/direct_messages?token={$data['token']}";
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = ["Content-Type"=>"application/json"];
