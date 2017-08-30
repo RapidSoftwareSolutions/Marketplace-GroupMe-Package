@@ -15,13 +15,13 @@ $app->post('/api/GroupMe/createBlock', function ($request, $response) {
     $requiredParams = ['accessToken'=>'token','user'=>'user','otherUser'=>'otherUser'];
     $optionalParams = [];
     $bodyParams = [
-       'json' => ['user','otherUser']
+       'query' => ['user','otherUser', 'token']
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 
     $client = $this->httpClient;
-    $query_str = "https://api.groupme.com/v3/blocks?token={$data['token']}";
+    $query_str = "https://api.groupme.com/v3/blocks";
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = ["Content-Type"=>"application/json"];
