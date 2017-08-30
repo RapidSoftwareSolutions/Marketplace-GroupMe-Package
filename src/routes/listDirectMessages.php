@@ -21,11 +21,10 @@ $app->post('/api/GroupMe/listDirectMessages', function ($request, $response) {
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 
     $client = $this->httpClient;
-    $query_str = "https://api.groupme.com/v3/groups/direct_messages";
+    $query_str = "https://api.groupme.com/v3/direct_messages";
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = ["Content-Type"=>"application/json"];
-
     try {
         $resp = $client->get($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
