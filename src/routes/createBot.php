@@ -18,13 +18,16 @@ $app->post('/api/GroupMe/createBot', function ($request, $response) {
        'json' => ['group_id','name','avatar_url','callback_url','dm_notification']
     ];
 
-    $data['bot'] = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
+    $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
 
     $client = $this->httpClient;
     $query_str = "https://api.groupme.com/v3/bots?token={$data['token']}";
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = ["Content-Type"=>"application/json"];
+
+    $requestParams['json']['bot'] = $requestParams['json'];
+
 
     try {
         $resp = $client->post($query_str, $requestParams);
