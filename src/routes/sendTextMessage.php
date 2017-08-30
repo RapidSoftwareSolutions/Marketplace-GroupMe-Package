@@ -19,14 +19,14 @@ $app->post('/api/GroupMe/sendTextMessage', function ($request, $response) {
     ];
 
     $data = \Models\Params::createParams($requiredParams, $optionalParams, $post_data['args']);
-
     $client = $this->httpClient;
     $query_str = "https://api.groupme.com/v3/groups/{$data['groupId']}/messages?token={$data['token']}";
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = ["Content-Type"=>"application/json"];
-
+    $requestParams['json']['message'] = $requestParams['json'];
     try {
+
         $resp = $client->POST($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
 

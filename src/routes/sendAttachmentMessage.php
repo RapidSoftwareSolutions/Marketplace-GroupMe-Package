@@ -25,6 +25,7 @@ $app->post('/api/GroupMe/sendAttachmentMessage', function ($request, $response) 
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = ["Content-Type"=>"application/json"];
+    $requestParams['json']['message'] = $requestParams['json'];
 
     try {
         $resp = $client->POST($query_str, $requestParams);

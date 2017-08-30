@@ -26,6 +26,8 @@ $app->post('/api/GroupMe/sendDirectTextMessage', function ($request, $response) 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = ["Content-Type"=>"application/json"];
 
+    $requestParams['json']['direct_message'] = $requestParams['json'];
+
     try {
         $resp = $client->POST($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
