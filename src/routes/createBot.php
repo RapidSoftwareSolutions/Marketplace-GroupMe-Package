@@ -25,9 +25,7 @@ $app->post('/api/GroupMe/createBot', function ($request, $response) {
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = ["Content-Type"=>"application/json"];
-
     $requestParams['json']['bot'] = $requestParams['json'];
-
 
     try {
         $resp = $client->post($query_str, $requestParams);
