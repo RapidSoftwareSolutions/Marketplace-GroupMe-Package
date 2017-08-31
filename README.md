@@ -114,6 +114,15 @@ Add members to a group.  The response includes a results_id that's used in the r
 | groupId    | String     | ID of the group
 | members    | List       | nickname is required. You must use one of the following identifiers: user_id, phone_number, or email.
 
+```
+sample of single member object
+{
+      "nickname": "Mom",
+      "user_id": "1234567890",
+      "guid": "GUID-1"
+    }
+```
+
 ## GroupMe.getAddResults
 Get the membership results from an add call.
 
@@ -164,6 +173,24 @@ Send a text message to a group
 | text       | String     | The maximum length is 1,000 characters.
 | attachments| List       | A polymorphic list of attachments (locations, images, etc). You may have more than one of any type of attachment, provided clients can display it.
 
+```
+sample of attachment objects
+{
+        "type": "image",
+        "url": "https://i.groupme.com/123456789"
+      },
+      {
+        "type": "image",
+        "url": "https://i.groupme.com/123456789"
+      },
+      {
+        "type": "location",
+        "lat": "40.738206",
+        "lng": "-73.993285",
+        "name": "GroupMe HQ"
+      }
+```
+
 ## GroupMe.sendAttachmentMessage
 Send a message with attachment and optional text to a group
 
@@ -174,6 +201,24 @@ Send a message with attachment and optional text to a group
 | sourceGuid | String     |  Client-side IDs for messages. This can be used by clients to set their own identifiers on messages, but the server also scans these for de-duplication. That is, if two messages are sent with the same source_guid within one minute of each other, the second message will fail with a 409 Conflict response.
 | text       | String     | The maximum length is 1,000 characters.
 | attachments| List       | A polymorphic list of attachments (locations, images, etc). You may have more than one of any type of attachment, provided clients can display it.
+
+```
+sample of attachment objects
+{
+        "type": "image",
+        "url": "https://i.groupme.com/123456789"
+      },
+      {
+        "type": "image",
+        "url": "https://i.groupme.com/123456789"
+      },
+      {
+        "type": "location",
+        "lat": "40.738206",
+        "lng": "-73.993285",
+        "name": "GroupMe HQ"
+      }
+```
 
 ## GroupMe.listChats
 Returns a paginated list of direct message chats, or conversations, sorted by updated_at descending.
@@ -205,6 +250,24 @@ Send a text DM to another user
 | text       | String     | The maximum length is 1,000 characters.
 | attachments| List       | A polymorphic list of attachments (locations, images, etc). You may have more than one of any type of attachment, provided clients can display it.
 
+```
+sample of attachment objects
+{
+        "type": "image",
+        "url": "https://i.groupme.com/123456789"
+      },
+      {
+        "type": "image",
+        "url": "https://i.groupme.com/123456789"
+      },
+      {
+        "type": "location",
+        "lat": "40.738206",
+        "lng": "-73.993285",
+        "name": "GroupMe HQ"
+      }
+```
+
 ## GroupMe.sendDirectAttachmentMessage
 Send a DM to another user with attachment and options text
 
@@ -215,6 +278,24 @@ Send a DM to another user with attachment and options text
 | sourceGuid | String     |  Client-side IDs for messages. This can be used by clients to set their own identifiers on messages, but the server also scans these for de-duplication. That is, if two messages are sent with the same source_guid within one minute of each other, the second message will fail with a 409 Conflict response.
 | text       | String     | The maximum length is 1,000 characters.
 | attachments| List       | A polymorphic list of attachments (locations, images, etc). You may have more than one of any type of attachment, provided clients can display it.
+
+```
+sample of attachment objects
+{
+        "type": "image",
+        "url": "https://i.groupme.com/123456789"
+      },
+      {
+        "type": "image",
+        "url": "https://i.groupme.com/123456789"
+      },
+      {
+        "type": "location",
+        "lat": "40.738206",
+        "lng": "-73.993285",
+        "name": "GroupMe HQ"
+      }
+```
 
 ## GroupMe.likeMessage
 Like a message.
@@ -267,7 +348,7 @@ Create a bot.
 | accessToken   | credentials| Access token provided by GroupMe
 | groupId       | String     | Id of the group
 | name          | String     | Bot name
-| avatar        | String     | Bot avatar
+| avatar        | String     | Bot avatar. Note that the url must be for an image hosted by our image service.
 | callbackUrl   | String     | Bot callback url
 | dmNotification| Select     | Enable DM notifications
 

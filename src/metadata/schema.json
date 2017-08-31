@@ -540,7 +540,7 @@
                         "type": "JSON",
                         "info": "Single member"
                     },
-                    "info": "nickname is required. You must use one of the following identifiers: user_id, phone_number, or email.",
+                    "info": "nickname is required. You must use one of the following identifiers: user_id, phone_number, or email. See README",
                     "required": true
                 }
             ],
@@ -831,7 +831,7 @@
                         "type": "JSON",
                         "info": "Single attachment"
                     },
-                    "info": "A polymorphic list of attachments (locations, images, etc). You may have more than one of any type of attachment, provided clients can display it.",
+                    "info": "A polymorphic list of attachments (locations, images, etc). You may have more than one of any type of attachment, provided clients can display it. See README",
                     "required": false
                 }
             ],
@@ -902,7 +902,7 @@
                         "type": "JSON",
                         "info": "Single attachment"
                     },
-                    "info": "A polymorphic list of attachments (locations, images, etc). You may have more than one of any type of attachment, provided clients can display it.",
+                    "info": "A polymorphic list of attachments (locations, images, etc). You may have more than one of any type of attachment, provided clients can display it. See README",
                     "required": true
                 }
             ],
@@ -1089,7 +1089,7 @@
                         "type": "JSON",
                         "info": "Single attachment"
                     },
-                    "info": "A polymorphic list of attachments (locations, images, etc). You may have more than one of any type of attachment, provided clients can display it.",
+                    "info": "A polymorphic list of attachments (locations, images, etc). You may have more than one of any type of attachment, provided clients can display it. ",
                     "required": false
                 }
             ],
@@ -1162,7 +1162,7 @@
                         "type": "JSON",
                         "info": "Single attachment"
                     },
-                    "info": "A polymorphic list of attachments (locations, images, etc). You may have more than one of any type of attachment, provided clients can display it.",
+                    "info": "A polymorphic list of attachments (locations, images, etc). You may have more than one of any type of attachment, provided clients can display it. See README",
                     "required": true
                 }
             ],
@@ -1464,7 +1464,7 @@
                     "name": "avatar",
                     "vendorName": "avatar_url",
                     "type": "String",
-                    "info": "Bot avatar",
+                    "info": "Bot avatar. Note that the url must be for an image hosted by our image service.",
                     "required": false
                 },
                 {
@@ -1784,7 +1784,7 @@
                     "vendorName": "registration_id",
                     "type": "String",
                     "info": "The push notification ID\/token that should be suppressed during SMS mode. If this is omitted, both SMS and push notifications will be delivered to the device.",
-                    "required": true
+                    "required": false
                 }
             ],
             "url": "https:\/\/api.groupme.com\/v3\/users\/sms_mode?token={$data['accessToken']}",

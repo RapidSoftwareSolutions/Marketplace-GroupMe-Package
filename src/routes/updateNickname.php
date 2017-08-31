@@ -25,7 +25,7 @@ $app->post('/api/GroupMe/updateNickname', function ($request, $response) {
 
     $requestParams = \Models\Params::createRequestBody($data, $bodyParams);
     $requestParams['headers'] = ["Content-Type"=>"application/json"];
-
+    $requestParams['json']['membership'] = $requestParams['json'];
     try {
         $resp = $client->POST($query_str, $requestParams);
         $responseBody = $resp->getBody()->getContents();
