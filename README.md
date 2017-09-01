@@ -2,7 +2,7 @@
 
 # GroupMe Package
 GroupMe is a free group messaging app. A free and simple way to stay in touch with friends and family, quickly and easily.
-* Domain: [GroupMe](http://http://groupme.com/)
+* Domain: [GroupMe](http://groupme.com/)
 * Credentials: accessToken
 
 ## How to get credentials: 
