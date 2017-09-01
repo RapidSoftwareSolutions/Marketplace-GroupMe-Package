@@ -6,7 +6,7 @@ GroupMe is a free group messaging app. A free and simple way to stay in touch wi
 * Credentials: accessToken
 
 ## How to get credentials: 
-0. Browse to [GroupMe](http://http://groupme.com/)
+0. Browse to [GroupMe](http://groupme.com/)
 1. Register or Log In
 2. Create new application at [Developers page](https://dev.groupme.com/applications/new) to get your accessToken
 
