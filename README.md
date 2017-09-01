@@ -23,7 +23,7 @@ GroupMe is a free group messaging app. A free and simple way to stay in touch wi
  
 
 ## GroupMe.listGroups
-List the authenticated user's active groups.
+List the authenticated user`s active groups.
 
 | Field      | Type       | Description
 |------------|------------|----------
@@ -57,7 +57,7 @@ Create a new group
 | groupName       | String     | Primary name of the group. Maximum 140 characters
 | groupDescription| String     | A subheading for the group. Maximum 255 characters
 | groupImage      | String     |  GroupMe Image Service URL
-| shareGroup      | Select     | If you pass a true value for share, we'll generate a share URL. Anybody with this URL can join the group.
+| shareGroup      | Select     | If you pass a true value for share, we`ll generate a share URL. Anybody with this URL can join the group.
 
 ## GroupMe.updateGroup
 Update existing group
@@ -69,7 +69,7 @@ Update existing group
 | groupName       | String     | Primary name of the group. Maximum 140 characters
 | groupDescription| String     | A subheading for the group. Maximum 255 characters
 | groupImage      | String     |  GroupMe Image Service URL
-| shareGroup      | Select     | If you pass a true value for share, we'll generate a share URL. Anybody with this URL can join the group.
+| shareGroup      | Select     | If you pass a true value for share, we`ll generate a share URL. Anybody with this URL can join the group.
 | officeMode      | Select     | Office mode of the group
 
 ## GroupMe.deleteGroup
@@ -106,7 +106,7 @@ Change owner of requested groups.
 | requests   | List       | One request is object where user_id is the new owner who must be active member of a group specified by group_id.
 
 ## GroupMe.addMembers
-Add members to a group.  The response includes a results_id that's used in the results request.
+Add members to a group.  The response includes a results_id that`s used in the results request.
 
 | Field      | Type       | Description
 |------------|------------|----------
@@ -322,7 +322,7 @@ A list of the liked messages in the group for a given period of time. Messages a
 |------------|------------|----------
 | accessToken| credentials| Access token provided by GroupMe
 | groupId    | String     | Id of the group
-| period     | Select     | One of: 'day', 'week', or 'month'
+| period     | Select     | One of: `day`, `week`, or `month`
 
 ## GroupMe.listMyLikes
 A list of messages you have liked. Messages are returned in reverse chrono-order. Note that the payload includes a liked_at timestamp in ISO-8601 format.
